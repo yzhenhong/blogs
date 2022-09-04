@@ -18,7 +18,7 @@
 
 实现方式：每次触发事件时设置一个延迟调用方法，并且取消之前的延时调用方法 缺点：如果事件在规定的时间间隔内被不断的触发，则调用方法会被不断的延迟              
 
-```
+```javascript
 // 非立即执行版
 function debounce(func, wait) {
   let timer;
@@ -80,7 +80,7 @@ function debounce3(func, wait, immediate) {
 ## 函数节流(throttle)
 
 实现方式：每次触发事件时，如果当前有等待执行的延时函数，则直接return
-```
+```javascript
 // 时间戳版
 function throttle(func, wait) {
   let previous = 0;
