@@ -1,6 +1,4 @@
 ## Windows平台安装MongoDB
-
-
 ### 下载以及安装
 https://www.mongodb.com/try/download/community
 
@@ -34,7 +32,6 @@ https://www.mongodb.com/try/download/community
 
 ![mongo_db_7.png](./imgs/mongo_db/mongo_db_7.png)
 
-
 ### 环境变量配置
 复制mongodb安装的bin目录 如：D:\Program Files\MongoDB\bin
 
@@ -56,8 +53,6 @@ v6.0版本后：
 
 cmd 输入：mongosh命令 看看是否成功
 ![mongo_db_14.png](./imgs/mongo_db/mongo_db_14.png)
-
-
 ### 启动服务
 ![mongo_db_15.png](./imgs/mongo_db/mongo_db_15.png)
 

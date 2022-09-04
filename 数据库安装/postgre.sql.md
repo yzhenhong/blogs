@@ -1,6 +1,5 @@
 ## Windows平台安装
 
-
 ### 下载以及安装
 https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
 根据自己情况下载对应平台和版本
@@ -32,8 +31,6 @@ https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
 
 安装完成，弹出默认启动Stack Builder，可以取消
 ![postgre_sql_10.png](./imgs/postgre_sql/postgre_sql_10.png)
-
-
 ### 启动服务
 
 打开 pgAdmin 4
