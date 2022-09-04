@@ -6,7 +6,7 @@ npm install -g ts-node
 npm install -g @types/node
 
 ## 配置tsconfig.json
-```
+```javascript
 {
   "compilerOptions": {
     // 指定 ECMAScript 版本
