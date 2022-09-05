@@ -173,3 +173,124 @@ ease-in-out:
 cubic-bezier(n,n,n,n):
 在 cubic-bezier 函数中定义自己的值。可能的值是 0 至 1 之间的数值。
 ```
+
+## 媒体查询@media
+通过@media可以针对不同屏幕大小定义不同样式的网页，页面会根据浏览器长宽来渲染页面。
+语法：
+```css
+@media mediaType and|not|only (media feature) {
+  /*CSS-Code;*/
+}
+```
+常用电脑屏幕使用宽度:
+1024 1280 1366 1440 1680 1920
+
+### 逻辑操作符
+
+- and：用于将多个媒体查询组合成一条媒体查询，当每个查询规则都为真时则该条媒体查询为真，另外通过 and 操作符还可以将媒体特性与媒体类型结合在一起；
+- not：用于否定媒体查询，当查询规则不为真时则返回 true，否则返回 false。如果使用 not 操作符，则还必须指定媒体类型；
+- only：仅在整个查询匹配时才会生效，当不使用 only 时，旧版的浏览器会将 screen and (max-width: 500px) 简单地解释为 screen，忽略查询的其余部分，并将样式应用于所有屏幕。 如果使用 only 运算符，则还必须指定媒体类型。
+
+and|not|only
+and放在mediaType后，连接属性，代表将多个media feature结合在一起；
+not否定，放在@media后，代表对该条信息取反；
+only代表仅仅，一般放在@media后，例如：@media only screen，代表仅仅针对彩色屏幕有效；
+
+逻辑操作符包含 not、and 和 only 三个，通过逻辑操作符可以构建复杂的媒体查询，您还可以通过逗号来分隔多个媒体查询，将它们组合为一个规则。
+
+### mediaType媒体类型
+- all所有屏幕;
+- screen 用于电脑屏幕，平板电脑，智能手机等;
+- print 用于打印机和打印预览;
+- speech 应用于屏幕阅读器等发声设备
+
+media feature: 媒体功能,max-width:页面最大宽度，min-width:页面最小宽度
+
+在使用媒体查询前面，首先要设置meta标签，其次要加载兼容文件js,设置ie渲染为最高；
+```css
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+```
+
+注意：
+1. 一般引入第一条meta标签就可以使用
+2. and|not|only (media feature)注意啦and和(media feature)之间有一个空格！！！ 
+
+### 定义媒体查询
+
+目前您可以通过以下两种方式来定义媒体查询：
+
+- 使用 @media 或 @import 规则在样式表中指定对应的设备类型；
+- 用 media 属性在
+1. @media
+    使用 @media 您可以指定一组媒体查询和一个 CSS 样式块，当且仅当媒体查询与正在使用的设备匹配时，指定的 CSS 样式才会应用于文档。示例代码如下：
+```css
+/* 在小于或等于 992 像素的屏幕上，将背景色设置为蓝色 */
+@media screen and (max-width: 992px) {
+  body {background-color: blue;}
+}
+ 
+/* 在 600 像素或更小的屏幕上，将背景色设置为橄榄色 */
+@media screen and (max-width: 600px) {
+  body {background-color: olive;}
+}
+```
+
+用min-width时，小的放上面大的在下面
+```css
+/*>=1024的设备*/
+@media (min-width: 1024px){
+  body{font-size: 18px;}
+}
+ 
+/*>=1280的设备*/
+@media (min-width: 1280px) {
+  body{font-size: 20px;}
+}
+```
+
+用max-width那么就是大的在上面，小的在下面
+```css
+@media (max-width: 1680px) {
+  body {background-color: #ff6699;}
+}
+ 
+@media (max-width: 1440px) {
+  body {background-color: #00ff66;}
+}
+```
+
+2. @import
+@import 用来导入指定的外部样式文件并指定目标的媒体类型，示例代码如下：
+```css
+@import url("css/screen.css") screen;   /* 引入外部样式，该样式仅会应用于电脑显示器 */
+@import url("css/print.css") print;     /* 引入外部样式，该样式仅会应用于打印设备 */
+body {
+  background: #f5f5f5;
+  line-height: 1.2;
+}
+```
+注意：所有 @import 语句都必须出现在样式表的开头，而且在样式表中定义的样式会覆盖导入的外部样式表中冲突的样式。
+
+3. link标签使用
+```html
+/* 当页面宽度大于等于 900 像素时应用该样式 */
+<link rel="stylesheet" media="screen and (min-width: 900px)" href="widescreen.css">
+/* 当页面宽度小于等于 600 像素时应用该样式 */
+<link rel="stylesheet" media="screen and (max-width: 600px)" href="smallscreen.css">
+```
+提示：在 media 属性中您还可以指定多种媒体类型，每种媒体类型之间使用逗号进行分隔，例如 media=“screen, print”。
+
+## 容器查询@container
+
+将父元素的样式应用于子元素。
+
+```css
+/* 当父容器宽度小于 650px 时，
+减小 .card 元素之间的网格间距到 1rem */
+@container (max-width: 650px) {
+  .card {
+    gap: 1rem;
+  }
+  /* ... */
+}
+```
