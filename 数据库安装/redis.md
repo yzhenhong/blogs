@@ -8,13 +8,14 @@ https://github.com/tporadowski/redis/releases
 
 ![redis_1.png](./imgs/redis/redis_1.png)
 
-下载好redis后，将其解压到指定目录，并记下解压的目录，后续用于环境变量配置
+下载好redis后，将其解压到指定目录，并记下解压的目录，后续用于环境变量配置<br>
 ![redis_2.png](./imgs/redis/redis_2.png)
 
 ### 环境变量配置
 ![redis_3.png](./imgs/redis/redis_3.png)
 ![redis_4.png](./imgs/redis/redis_4.png)
 
-然后cmd执行命令：
+然后cmd执行命令：<br>
 redis-server.exe
+
 ![redis_5.png](./imgs/redis/redis_5.png)

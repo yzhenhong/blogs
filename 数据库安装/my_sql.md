@@ -18,29 +18,57 @@ https://dev.mysql.com/downloads/mysql/
 4、编辑my.ini文件，文件内容如下：
 ![my_sql_4.png](./imgs/my_sql/my_sql_4.png)
 
-有两点需要注意修改的：
-A、basedir这里输入的是mysql解压存放的文件路径
-B、datadir这里设置mysql数据库的数据存放目录(可以自行设置目录)
+```
+[mysqld]
+# 设置3306端口
+port=3306
+# 设置mysql的安装目录 ---这里输入你安装的文件路径----
+basedir=D:\Program Files\MySQL
+# 设置mysql数据库的数据的存放目录
+datadir=D:\Program Files\MySQL\data
+# 允许最大连接数
+max_connections=200
+# 允许连接失败的次数。
+max_connect_errors=10
+# 服务端使用的字符集默认为utf8
+character-set-server=utf8
+# 创建新表时将使用的默认存储引擎
+default-storage-engine=INNODB
+# 默认使用“mysql_native_password”插件认证
+#mysql_native_password
+default_authentication_plugin=mysql_native_password
+[mysql]
+# 设置mysql客户端默认字符集
+default-character-set=utf8
+[client]
+# 设置mysql客户端连接服务端时默认使用的端口
+port=3306
+default-character-set=utf8
+```
+
+有两点需要注意修改的：<br>
+A、basedir这里输入的是mysql解压存放的文件路径<br>
+B、datadir这里设置mysql数据库的数据存放目录(可以自行设置目录)<br>
 
 5、打开cmd进入mysql的bin文件下，依次执行命令
 ![my_sql_5.png](./imgs/my_sql/my_sql_5.png)
 
-6、在cmd上执行第一条命令：
-//安装mysql  安装完成后Mysql会有一个随机密码
+6、在cmd上执行第一条命令：<br>
+// 安装mysql  安装完成后Mysql会有一个随机密码<br>
 mysqld --initialize --console
 
 执行结果如下：
 
 ![my_sql_6.png](./imgs/my_sql/my_sql_6.png)
 
-注意：
-A、**一定要保存截图，里面有安装的初始密码**！！！！
-B、安装过程中可能会提示以下问题
+注意：<br>
+A、**一定要保存截图，里面有安装的初始密码**！！！！<br>
+B、安装过程中可能会提示以下问题<br>
 
-7、接下来在cmd执行第二条命令：
-
-//安装mysql服务并启动   
+7、接下来在cmd执行第二条命令：<br>
+// 安装mysql服务并启动<br>
 mysqld --install mysql
+<br>
 ![my_sql_7.png](./imgs/my_sql/my_sql_7.png)
 
 ### 环境变量配置

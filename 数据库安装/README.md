@@ -1,7 +1,5 @@
 # MongoDB
-
 ## Windows平台安装MongoDB
-
 ### 下载以及安装
 https://www.mongodb.com/try/download/community
 
@@ -36,27 +34,27 @@ https://www.mongodb.com/try/download/community
 ![mongo_db_7.png](./imgs/mongo_db/mongo_db_7.png)
 
 ### 环境变量配置
-复制mongodb安装的bin目录 如：D:\Program Files\MongoDB\bin
+复制mongodb安装的bin目录<br>
+如：D:\Program Files\MongoDB\bin
 
-打开系统属性》高级》环境变量 》 系统环境》path》编辑新增mongodb安装的bin目录
+打开系统属性》高级》环境变量 》 系统环境》path》编辑新增mongodb安装的bin目录<br>
 ![mongo_db_8.png](./imgs/mongo_db/mongo_db_8.png)
 ![mongo_db_9.png](./imgs/mongo_db/mongo_db_9.png)
 
-v6.0版本前：
-这个时候已经可以 cmd 输入：mongo命令 看看是否成功
+
+v6.0版本前：<br>
+这个时候已经可以 cmd 输入：mongo命令 看看是否成功<br>
 ![mongo_db_10.png](./imgs/mongo_db/mongo_db_10.png)
 
-v6.0版本后：
-需要再下载个MongoDB Shell ：https://www.mongodb.com/try/download/shell
+v6.0版本后：<br>
+需要再下载个MongoDB Shell ：https://www.mongodb.com/try/download/shell<br>
 
 ![mongo_db_11.png](./imgs/mongo_db/mongo_db_11.png)
 ![mongo_db_12.png](./imgs/mongo_db/mongo_db_12.png)
 ![mongo_db_13.png](./imgs/mongo_db/mongo_db_13.png)
 
-cmd 输入：mongosh命令 看看是否成功
+cmd 输入：mongosh命令 看看是否成功<br>
 ![mongo_db_14.png](./imgs/mongo_db/mongo_db_14.png)
-
-
 ### 启动服务
 ![mongo_db_15.png](./imgs/mongo_db/mongo_db_15.png)
 
@@ -86,29 +84,57 @@ https://dev.mysql.com/downloads/mysql/
 4、编辑my.ini文件，文件内容如下：
 ![my_sql_4.png](./imgs/my_sql/my_sql_4.png)
 
-有两点需要注意修改的：
-A、basedir这里输入的是mysql解压存放的文件路径
-B、datadir这里设置mysql数据库的数据存放目录(可以自行设置目录)
+```
+[mysqld]
+# 设置3306端口
+port=3306
+# 设置mysql的安装目录 ---这里输入你安装的文件路径----
+basedir=D:\Program Files\MySQL
+# 设置mysql数据库的数据的存放目录
+datadir=D:\Program Files\MySQL\data
+# 允许最大连接数
+max_connections=200
+# 允许连接失败的次数。
+max_connect_errors=10
+# 服务端使用的字符集默认为utf8
+character-set-server=utf8
+# 创建新表时将使用的默认存储引擎
+default-storage-engine=INNODB
+# 默认使用“mysql_native_password”插件认证
+#mysql_native_password
+default_authentication_plugin=mysql_native_password
+[mysql]
+# 设置mysql客户端默认字符集
+default-character-set=utf8
+[client]
+# 设置mysql客户端连接服务端时默认使用的端口
+port=3306
+default-character-set=utf8
+```
+
+有两点需要注意修改的：<br>
+A、basedir这里输入的是mysql解压存放的文件路径<br>
+B、datadir这里设置mysql数据库的数据存放目录(可以自行设置目录)<br>
 
 5、打开cmd进入mysql的bin文件下，依次执行命令
 ![my_sql_5.png](./imgs/my_sql/my_sql_5.png)
 
-6、在cmd上执行第一条命令：
-//安装mysql  安装完成后Mysql会有一个随机密码
+6、在cmd上执行第一条命令：<br>
+// 安装mysql  安装完成后Mysql会有一个随机密码<br>
 mysqld --initialize --console
 
 执行结果如下：
 
 ![my_sql_6.png](./imgs/my_sql/my_sql_6.png)
 
-注意：
-A、**一定要保存截图，里面有安装的初始密码**！！！！
-B、安装过程中可能会提示以下问题
+注意：<br>
+A、**一定要保存截图，里面有安装的初始密码**！！！！<br>
+B、安装过程中可能会提示以下问题<br>
 
-7、接下来在cmd执行第二条命令：
-
-//安装mysql服务并启动   
+7、接下来在cmd执行第二条命令：<br>
+// 安装mysql服务并启动<br>
 mysqld --install mysql
+<br>
 ![my_sql_7.png](./imgs/my_sql/my_sql_7.png)
 
 ### 环境变量配置
@@ -151,43 +177,43 @@ mysql -uroot -p
 ## Windows平台安装
 
 ### 下载以及安装
+
 https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
-根据自己情况下载对应平台和版本
+根据自己情况下载对应平台和版本<br>
 ![postgre_sql_1.png](./imgs/postgre_sql/postgre_sql_1.png)
 
-下载完成后，双击下载安装包，开始安装(安装时候可能存在电脑用户名中文无法安装，可以更改名字后在安装)
+下载完成后，双击下载安装包，开始安装(安装时候可能存在电脑用户名中文无法安装，可以更改名字后在安装)<br>
 ![postgre_sql_2.png](./imgs/postgre_sql/postgre_sql_2.png)
 
-你可以修改安装路径
+你可以修改安装路径<br>
 ![postgre_sql_3.png](./imgs/postgre_sql/postgre_sql_3.png)
 
-选择安装组件，不懂的选就是全部勾上：
+选择安装组件，不懂的选就是全部勾上：<br>
 ![postgre_sql_4.png](./imgs/postgre_sql/postgre_sql_4.png)
 
-设置数据库路径(根据自己情况选择目录)
+设置数据库路径(根据自己情况选择目录)<br>
 ![postgre_sql_5.png](./imgs/postgre_sql/postgre_sql_5.png)
 
-设置超级用户的密码
+设置超级用户的密码<br>
 ![postgre_sql_6.png](./imgs/postgre_sql/postgre_sql_6.png)
 
-数据库服务端口号，默认端口号即可
+数据库服务端口号，默认端口号即可<br>
 ![postgre_sql_7.png](./imgs/postgre_sql/postgre_sql_7.png)
 
-系统语言/地区，建议选择默认
+系统语言/地区，建议选择默认<br>
 ![postgre_sql_8.png](./imgs/postgre_sql/postgre_sql_8.png)
 
-后面直接点 Next 直到安装完成
+后面直接点 Next 直到安装完成<br>
 ![postgre_sql_9.png](./imgs/postgre_sql/postgre_sql_9.png)
 
-安装完成，弹出默认启动Stack Builder，可以取消
+安装完成，弹出默认启动Stack Builder，可以取消<br>
 ![postgre_sql_10.png](./imgs/postgre_sql/postgre_sql_10.png)
-
 ### 启动服务
 
-打开 pgAdmin 4
+打开 pgAdmin 4<br>
 ![postgre_sql_11.png](./imgs/postgre_sql/postgre_sql_11.png)
 
-输入前面设置的密码
+输入前面设置的密码<br>
 ![postgre_sql_12.png](./imgs/postgre_sql/postgre_sql_12.png)
 
 
@@ -205,13 +231,14 @@ https://github.com/tporadowski/redis/releases
 
 ![redis_1.png](./imgs/redis/redis_1.png)
 
-下载好redis后，将其解压到指定目录，并记下解压的目录，后续用于环境变量配置
+下载好redis后，将其解压到指定目录，并记下解压的目录，后续用于环境变量配置<br>
 ![redis_2.png](./imgs/redis/redis_2.png)
 
 ### 环境变量配置
 ![redis_3.png](./imgs/redis/redis_3.png)
 ![redis_4.png](./imgs/redis/redis_4.png)
 
-然后cmd执行命令：
+然后cmd执行命令：<br>
 redis-server.exe
+
 ![redis_5.png](./imgs/redis/redis_5.png)
