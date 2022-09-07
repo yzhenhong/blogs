@@ -33,25 +33,26 @@ https://www.mongodb.com/try/download/community
 ![mongo_db_7.png](./imgs/mongo_db/mongo_db_7.png)
 
 ### 环境变量配置
-复制mongodb安装的bin目录 如：D:\Program Files\MongoDB\bin
+复制mongodb安装的bin目录<br>
+如：D:\Program Files\MongoDB\bin
 
-打开系统属性》高级》环境变量 》 系统环境》path》编辑新增mongodb安装的bin目录
+打开系统属性》高级》环境变量 》 系统环境》path》编辑新增mongodb安装的bin目录<br>
 ![mongo_db_8.png](./imgs/mongo_db/mongo_db_8.png)
 ![mongo_db_9.png](./imgs/mongo_db/mongo_db_9.png)
 
 
-v6.0版本前：
-这个时候已经可以 cmd 输入：mongo命令 看看是否成功
+v6.0版本前：<br>
+这个时候已经可以 cmd 输入：mongo命令 看看是否成功<br>
 ![mongo_db_10.png](./imgs/mongo_db/mongo_db_10.png)
 
-v6.0版本后：
-需要再下载个MongoDB Shell ：https://www.mongodb.com/try/download/shell
+v6.0版本后：<br>
+需要再下载个MongoDB Shell ：https://www.mongodb.com/try/download/shell<br>
 
 ![mongo_db_11.png](./imgs/mongo_db/mongo_db_11.png)
 ![mongo_db_12.png](./imgs/mongo_db/mongo_db_12.png)
 ![mongo_db_13.png](./imgs/mongo_db/mongo_db_13.png)
 
-cmd 输入：mongosh命令 看看是否成功
+cmd 输入：mongosh命令 看看是否成功<br>
 ![mongo_db_14.png](./imgs/mongo_db/mongo_db_14.png)
 ### 启动服务
 ![mongo_db_15.png](./imgs/mongo_db/mongo_db_15.png)
