@@ -1,214 +1,481 @@
-### **v-model**
+# Vue.js 完全指南
 
+## 目录
+1. [Vue.js 基础](#vuejs-基础)
+2. [核心概念](#核心概念)
+3. [组件系统](#组件系统)
+4. [状态管理](#状态管理)
+5. [路由管理](#路由管理)
+6. [Vue 3 新特性](#vue-3-新特性)
+7. [性能优化](#性能优化)
 
+## Vue.js 基础
 
-原理：v-model本质上是一个语法糖。例如在inpu中，就是value属性和input事件的合写。
+### 什么是 Vue.js
+Vue.js 是一个渐进式的 JavaScript 框架，用于构建用户界面。它被设计为可以自底向上逐层应用。
 
-v-model 是一个用于实现表单元素和组件双向数据绑定的指令。
+### 安装与配置
+1. CDN 引入
+```html
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+```
 
-核心作用是将表单输入的值与 Vue 实例的数据属性进行动态绑定，当用户修改输入时，数据会自动更新，反之亦然。
+2. NPM 安装
+```bash
+npm install vue@next
+```
 
+3. 创建 Vue 项目
+```bash
+npm create vue@latest
+```
 
-一、基本用法
-
-v-model 常用于表单元素（如 input、textarea、select），直接绑定一个数据属性：
-
-
-
-``` 
+### 基本语法
+1. 模板语法
+```vue
 <template>
-  <input v-model="message" placeholder="输入内容">
-  <p>输入的内容是：{{ message }}</p>
+  <div>
+    <!-- 文本插值 -->
+    <p>{{ message }}</p>
+    
+    <!-- 指令 -->
+    <p v-if="seen">现在你看到我了</p>
+    <a v-bind:href="url">链接</a>
+    <button v-on:click="doSomething">点击</button>
+  </div>
 </template>
- 
+
 <script>
 export default {
   data() {
     return {
-      message: ""
-    };
+      message: 'Hello Vue!',
+      seen: true,
+      url: 'https://vuejs.org'
+    }
+  },
+  methods: {
+    doSomething() {
+      console.log('按钮被点击')
+    }
   }
-};
+}
 </script>
 ```
 
-
-
-
-
-二、v-model 的原理
-
-v-model 是语法糖，底层基于 value 属性 + input 事件 实现双向绑定。例如，上述代码等价于：
-
-
-```
-<input 
-  :value="message" 
-  @input="message = $event.target.value"
->
-```
-
-
-
-
-
- 
-
-
- 
-
-### **Vue双向绑定原理**
-
-
-
-
-
-
-
-采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。
-
- 
-
-#### **总结：**
-
-1.vue首先通过Observer类，使用Object.defineProperty方法包装了数据，使object变成一个具有getter/setter属性的数据。
-
- 
-
-读取数据的时候通过getter方法读取，并在getter方法里面调用了Dep模块的dep.depend()方法收集依赖，并为该依赖创建一个对应的watcher实例。
-
- 
-
-通过setter方法改变数据的时候调用了Dep模块的dep.notify()方法来通知依赖，即依赖对应的watcher实例，遍历所有的watcher实例。
-
- 
-
-2.watcher实例不直接更新视图，而是交给scheduler调度器，scheduler维护一个事件队列通过nextTick执行事件，从而更新视图。
-
-3.Compiler解析指令和模板，和Observer是同时进行的，将节点实例化后，将实例保存在Dep中，当Watcher 观察者发现数据变化通知视图更新。
-
-### **Vue 2和3的区别**
-
-#### **Vue3 的 Diff 优化策略**
-
-**补丁标志（Patch Flags）**
-
-在编译阶段分析模板，为动态绑定的节点添加标记（如 TEXT、CLASS、PROPS），标记其动态部分类型。
-
-效果：Diff 时只需检查标记的动态属性，跳过静态内容。
-
-
-
-```
-// 编译后的 VNode（动态 class 和 text）
-createVNode("div", {
-  class: _normalizeClass({ active: isActive }),
-  text: dynamicText
-}, null, 3 /* CLASS, TEXT */);  // 补丁标志：3 = 1 (CLASS) + 2 (TEXT)
- 
-```
-
-
-
-
-
-**静态提升（Static Hoisting）**
-
-将静态节点（无动态绑定）提取到渲染函数外部，避免重复创建 VNode。
-
-效果：减少内存占用和 Diff 时的比对次数。
-
-
-
-```
-// 静态节点提升到外部
-const _hoisted = createVNode("div", null, "Static Content");
- 
-function render() {
-  return (_openBlock(), _createBlock(_hoisted));
-}
- 
-```
-
-
-
-
-
-#### **Tree-shaking 支持：按需打包优化**
-
-**1. 实现机制**
-
-模块化拆分：将 Vue 功能拆分为独立模块（如 v-model、transition、keep-alive）。ES Module 输出：构建工具（如 Webpack、Rollup）可静态分析依赖关系。
-
-**2. 效果对比**
-
-| **场景**     | **Vue2**     | **Vue3**           |
-| ------------ | ------------ | ------------------ |
-| 全量引入     | ~20KB (全量) | ~12KB (核心运行时) |
-| 使用部分功能 | 全量包含     | 仅打包使用到的模块 |
-
-####  
-
-#### **Fragment（多根组件）**
-
-​                ● Vue2 限制：组件模板必须单根节点，导致冗余包裹元素。
-
-​                ● Vue3 改进：支持多根节点，减少 DOM 层级。
-
-
-
-```
-<!-- Vue3 合法模板 -->
+## 核心概念
+
+### 响应式系统
+1. 数据响应式
+```vue
 <template>
-  <header>导航栏</header>
-  <main>内容区</main>
-  <footer>页脚</footer>
+  <div>
+    <p>Count: {{ count }}</p>
+    <button @click="increment">增加</button>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      count: 0
+    }
+  },
+  methods: {
+    increment() {
+      this.count++
+    }
+  }
+}
+</script>
+```
+
+2. 计算属性
+```vue
+<template>
+  <div>
+    <p>原始消息: {{ message }}</p>
+    <p>反转消息: {{ reversedMessage }}</p>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      message: 'Hello'
+    }
+  },
+  computed: {
+    reversedMessage() {
+      return this.message.split('').reverse().join('')
+    }
+  }
+}
+</script>
+```
+
+### v-model 双向绑定
+```vue
+<template>
+  <div>
+    <input v-model="message" placeholder="请输入">
+    <p>输入的内容是：{{ message }}</p>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      message: ''
+    }
+  }
+}
+</script>
+```
+
+### 生命周期钩子
+```vue
+<script>
+export default {
+  data() {
+    return {
+      message: 'Hello'
+    }
+  },
+  beforeCreate() {
+    console.log('实例创建之前')
+  },
+  created() {
+    console.log('实例创建完成')
+  },
+  beforeMount() {
+    console.log('挂载之前')
+  },
+  mounted() {
+    console.log('挂载完成')
+  },
+  beforeUpdate() {
+    console.log('更新之前')
+  },
+  updated() {
+    console.log('更新完成')
+  },
+  beforeUnmount() {
+    console.log('卸载之前')
+  },
+  unmounted() {
+    console.log('卸载完成')
+  }
+}
+</script>
+```
+
+## 组件系统
+
+### 组件基础
+1. 组件注册
+```vue
+<!-- 全局组件 -->
+<script>
+const app = createApp({})
+app.component('my-component', {
+  template: '<div>全局组件</div>'
+})
+</script>
+
+<!-- 局部组件 -->
+<script>
+import ChildComponent from './ChildComponent.vue'
+
+export default {
+  components: {
+    ChildComponent
+  }
+}
+</script>
+```
+
+2. 组件通信
+```vue
+<!-- 父组件 -->
+<template>
+  <div>
+    <child-component
+      :prop-message="message"
+      @custom-event="handleEvent"
+    />
+  </div>
+</template>
+
+<!-- 子组件 -->
+<template>
+  <div>
+    <p>{{ propMessage }}</p>
+    <button @click="emitEvent">触发事件</button>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    propMessage: String
+  },
+  emits: ['custom-event'],
+  methods: {
+    emitEvent() {
+      this.$emit('custom-event', '子组件数据')
+    }
+  }
+}
+</script>
+```
+
+### 高级组件
+1. 动态组件
+```vue
+<template>
+  <component :is="currentComponent"></component>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      currentComponent: 'component-a'
+    }
+  }
+}
+</script>
+```
+
+2. 异步组件
+```vue
+<script>
+const AsyncComponent = defineAsyncComponent(() =>
+  import('./AsyncComponent.vue')
+)
+</script>
+```
+
+## 状态管理
+
+### Vuex
+1. 基本使用
+```javascript
+// store/index.js
+import { createStore } from 'vuex'
+
+export default createStore({
+  state: {
+    count: 0
+  },
+  mutations: {
+    increment(state) {
+      state.count++
+    }
+  },
+  actions: {
+    incrementAsync({ commit }) {
+      setTimeout(() => {
+        commit('increment')
+      }, 1000)
+    }
+  },
+  getters: {
+    doubleCount: state => state.count * 2
+  }
+})
+```
+
+2. 在组件中使用
+```vue
+<template>
+  <div>
+    <p>Count: {{ count }}</p>
+    <p>Double: {{ doubleCount }}</p>
+    <button @click="increment">增加</button>
+  </div>
+</template>
+
+<script>
+import { mapState, mapGetters, mapMutations } from 'vuex'
+
+export default {
+  computed: {
+    ...mapState(['count']),
+    ...mapGetters(['doubleCount'])
+  },
+  methods: {
+    ...mapMutations(['increment'])
+  }
+}
+</script>
+```
+
+### Pinia (Vue 3)
+```javascript
+// stores/counter.js
+import { defineStore } from 'pinia'
+
+export const useCounterStore = defineStore('counter', {
+  state: () => ({
+    count: 0
+  }),
+  actions: {
+    increment() {
+      this.count++
+    }
+  },
+  getters: {
+    doubleCount: (state) => state.count * 2
+  }
+})
+```
+
+## 路由管理
+
+### Vue Router
+1. 基本配置
+```javascript
+// router/index.js
+import { createRouter, createWebHistory } from 'vue-router'
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: () => import('../views/Home.vue')
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: () => import('../views/About.vue')
+  }
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
+
+export default router
+```
+
+2. 路由导航
+```vue
+<template>
+  <nav>
+    <router-link to="/">首页</router-link>
+    <router-link to="/about">关于</router-link>
+  </nav>
+  <router-view></router-view>
 </template>
 ```
 
+## Vue 3 新特性
 
+### Composition API
+```vue
+<script setup>
+import { ref, computed, onMounted } from 'vue'
 
+const count = ref(0)
+const doubleCount = computed(() => count.value * 2)
 
+function increment() {
+  count.value++
+}
 
-#### **Teleport（传送门）**
+onMounted(() => {
+  console.log('组件已挂载')
+})
+</script>
 
-​                ● 功能：将组件渲染到 DOM 任意位置（如全局弹窗）。
-
-​                ● 场景：解决样式隔离或 DOM 嵌套限制问题。
-
-
-
+<template>
+  <div>
+    <p>Count: {{ count }}</p>
+    <p>Double: {{ doubleCount }}</p>
+    <button @click="increment">增加</button>
+  </div>
+</template>
 ```
+
+### Teleport
+```vue
 <template>
   <teleport to="body">
-    <div class="modal">模态框内容</div>
+    <div class="modal">
+      <h2>模态框</h2>
+      <p>这是一个使用 Teleport 的模态框</p>
+    </div>
   </teleport>
 </template>
 ```
 
-
-
-
-
-#### **Suspense（异步组件）**
-
-​                ● 功能：优雅处理异步组件加载状态。
-
-​                ● 场景：数据请求、动态导入组件时的加载中/错误状态。
-
- 
-
-
-
-```
+### Suspense
+```vue
 <template>
-  <suspense>
+  <Suspense>
     <template #default>
       <AsyncComponent />
     </template>
     <template #fallback>
-      <div>Loading...</div>
+      <div>加载中...</div>
     </template>
-  </suspense>
+  </Suspense>
 </template>
+```
+
+## 性能优化
+
+### 代码分割
+```javascript
+// 路由懒加载
+const routes = [
+  {
+    path: '/about',
+    component: () => import('./views/About.vue')
+  }
+]
+```
+
+### 虚拟列表
+```vue
+<template>
+  <RecycleScroller
+    class="scroller"
+    :items="items"
+    :item-size="32"
+    key-field="id"
+    v-slot="{ item }"
+  >
+    <div class="user">
+      {{ item.name }}
+    </div>
+  </RecycleScroller>
+</template>
+```
+
+### 缓存组件
+```vue
+<template>
+  <keep-alive>
+    <component :is="currentComponent" />
+  </keep-alive>
+</template>
+```
+
+### 性能监控
+```javascript
+// 性能标记
+export default {
+  mounted() {
+    performance.mark('component-mounted')
+    // 组件逻辑
+    performance.measure('component-render', 'component-mounted')
+  }
+}
 ```
