@@ -2,7 +2,7 @@
  * @Author: yangzhenhong
  * @Date: 2025-05-28 09:58:37
  * @LastEditors: yangzhenhong
- * @LastEditTime: 2025-06-04 17:34:07
+ * @LastEditTime: 2025-06-05 16:58:06
  * @FilePath: \blogs\docs\_sidebar.md
  * @Description: 
 -->
@@ -24,6 +24,7 @@
 
 * Vue
   * [Vue](/vue/index.md)
+  * [Vue异步组件](/vue/vue-async-components.md)
 
 * Nuxt.js
   * [Nuxt.js](/nuxt/index.md)
