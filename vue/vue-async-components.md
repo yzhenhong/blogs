@@ -192,7 +192,7 @@ export function resolveAsyncComponent(
 
 异步组件状态转换流程：
 <div>
-  <img src="/imgs/vue-async-components/state-diagram.png" width="400" height="300" />
+  <img src="./imgs/vue-async-components/state-diagram.png" width="400" height="300" />
 <div> 
 
 
