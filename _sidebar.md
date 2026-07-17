@@ -7,15 +7,15 @@
  * @Description: 
 -->
 
-* [SEO 优化](/seo/index.md)
+* SEO优化 (/seo/index.md)
 
-* [性能优化](/optimization/index.md)
+* 性能优化 (/optimization/index.md)
 
-* [CSS](/css/index.md)
+* CSS (/css/index.md)
 
-* [JavaScript](/js/index.md)
+* JavaScript (/js/index.md)
 
-* [TypeScript](/ts/index.md)
+* TypeScript (/ts/index.md)
 
 * 前端框架
   * [Vue](/vue/index.md)
