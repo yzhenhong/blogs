@@ -32,7 +32,7 @@
 - [数组常用方法](/files/js数组的常用方法/README.md)
 - [对象常用方法](/files/js对象的常用方法/README.md)
 - [函数](/files/函数/README.md)
-- [`new` 运算符](/files/javascript的new运算符/README.md)
+- [new 运算符](/files/javascript的new运算符/README.md)
 - [防抖与节流](/files/防抖和节流/README.md)
 - [深度优先与广度优先遍历](/files/深度优先遍历和广度优先遍历/README.md)
 
