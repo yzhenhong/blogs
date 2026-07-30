@@ -8,6 +8,8 @@
 5. [原生能力](#原生能力)
 6. [状态管理](#状态管理)
 7. [性能优化](#性能优化)
+8. [工程与发布](#工程与发布)
+9. [常见问题](#常见问题)
 
 ## React Native 基础
 
@@ -301,7 +303,7 @@ interface UserStore {
   clear: () => void
 }
 
-const useUserStore = create<UserStore>()()
+const useUserStore = create<UserStore>()(
   persist(
     (set) => ({
       user: null,
@@ -312,7 +314,7 @@ const useUserStore = create<UserStore>()()
       name: 'user-store',
       storage: createJSONStorage(() => AsyncStorage),
     }
-  )
+  ),
 )
 ```
 
@@ -330,21 +332,28 @@ const ListItem = memo(({ item, onPress }: { item: Item; onPress: (id: string) =>
   )
 })
 
-const Parent = () => {
+const Parent = ({ items }: { items: Item[] }) => {
   const handlePress = useCallback((id: string) => {
     console.log(id)
   }, [])
 
-  return <FlatList renderItem={({ item }) => <ListItem item={item} onPress={handlePress} />} />
+  return (
+    <FlatList
+      data={items}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => <ListItem item={item} onPress={handlePress} />}
+    />
+  )
 }
 ```
 
 ### Hermes 引擎
-```json
-// android/gradle.properties
-// hermesEnabled = true（React Native 0.70+ 默认开启）
 
-// iOS Podfile 自动配置，无需手动修改
+Hermes 是 React Native 默认使用的 JavaScript 引擎。升级 React Native 后应重新测量冷启动、内存和关键页面，避免沿用旧版本结论。
+
+```properties
+# android/gradle.properties
+hermesEnabled=true
 ```
 
 ### InteractionManager
@@ -353,8 +362,95 @@ import { InteractionManager } from 'react-native'
 
 // 等动画结束后再执行重计算任务，避免掉帧
 useEffect(() => {
-  InteractionManager.runAfterInteractions(() => {
+  const task = InteractionManager.runAfterInteractions(() => {
     // 执行耗时操作
   })
+
+  return () => task.cancel()
 }, [])
 ```
+
+对于新代码，也可以使用 `requestIdleCallback` 安排低优先级任务。无论采用哪种方式，都不要在 JavaScript 线程执行大规模同步计算。
+
+## 工程与发布
+
+### 处理安全区域和软键盘
+
+全面屏设备的状态栏、圆角和底部指示器不能使用固定像素猜测。页面根节点应接入 safe area，输入表单还要验证 iOS 与 Android 的键盘避让行为。
+
+```tsx
+import { KeyboardAvoidingView, Platform } from 'react-native'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+
+const FormScreen = () => (
+  <SafeAreaProvider>
+    <SafeAreaView style={{ flex: 1 }} edges={['top', 'bottom']}>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
+        {/* 表单内容 */}
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  </SafeAreaProvider>
+)
+```
+
+### 监听前后台状态
+
+应用进入后台后应暂停轮询、动画和非必要定位，回到前台时再校验登录状态和过期数据。
+
+```tsx
+import { AppState } from 'react-native'
+
+useEffect(() => {
+  const subscription = AppState.addEventListener('change', (state) => {
+    if (state === 'active') refreshStaleData()
+  })
+
+  return () => subscription.remove()
+}, [])
+```
+
+### 权限处理
+
+权限不是一个布尔值。至少要区分首次询问、已允许、已拒绝和永久拒绝，并向用户解释请求权限的实际用途。Android 权限随系统版本变化，iOS 还需要在 `Info.plist` 配置用途说明。
+
+### 环境配置
+
+开发、测试和生产环境应使用不同的 API 地址、应用标识和第三方服务配置。密钥不能因为写进 `.env` 就变得安全：打进客户端的内容最终都能被提取，真正的服务端密钥只能留在服务端。
+
+### 发布检查
+
+```text
+[ ] Android release 构建已使用正式签名并验证升级安装
+[ ] iOS Archive、证书、隐私清单和商店资料完整
+[ ] 最低支持系统的真机可以启动并完成核心流程
+[ ] 权限拒绝、断网、切后台和进程恢复均有可用状态
+[ ] source map 已安全上传到错误监控服务
+[ ] 安装包中没有测试服务器地址、调试菜单和敏感日志
+```
+
+## 常见问题
+
+### 为什么修改原生依赖后启动失败
+
+安装或升级包含原生代码的依赖后，通常需要重新构建 App；iOS 还要重新安装 Pods。Metro 只负责 JavaScript bundle，无法把新的原生二进制热更新进已经安装的应用。
+
+### 为什么列表仍然卡顿
+
+先检查是否使用 `ScrollView` 一次渲染全部数据，再检查 `renderItem` 是否创建复杂组件、图片是否过大、key 是否稳定，以及父组件是否频繁产生新对象。不要在没有测量前给所有组件添加 `memo`。
+
+### Expo 还是 React Native CLI
+
+Expo 适合快速开始，并提供成熟的构建与常用原生能力；需要深度修改原生工程或集成特殊 SDK 时，应确认该能力是否支持 config plugin 或 development build。两者不是永久对立的选择，项目可以按能力需求演进。
+
+### 调试时正常，Release 异常
+
+重点检查环境变量、代码压缩、网络安全策略、原生权限、ABI/架构、签名配置和被开发模式掩盖的竞态条件。发布前必须直接测试 release 产物，不能只依赖 Metro 开发模式。
+
+## 延伸阅读
+
+- [React Native 官方文档](https://reactnative.dev/docs/getting-started)
+- [React Navigation](https://reactnavigation.org/docs/getting-started)
+- [跨端开发选型](/cross-platform/index.md)

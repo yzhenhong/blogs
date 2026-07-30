@@ -101,23 +101,21 @@ electron-quick-start/
 └─ package.json
 ```
 
-修改 `package.json`：
+在 npm 生成的 `package.json` 中补充入口和启动命令，保留安装时自动写入的 `devDependencies`：
 
 ```json
 {
   "name": "electron-quick-start",
   "version": "1.0.0",
   "main": "main.cjs",
+  "private": true,
   "scripts": {
     "start": "electron ."
-  },
-  "devDependencies": {
-    "electron": "^39.0.0"
   }
 }
 ```
 
-> `electron` 的具体版本以安装时写入的版本为准，不必照抄示例版本。应用应提交 lock 文件，保证团队和 CI 使用同一依赖版本。
+> 应用应提交 `package-lock.json`，保证团队和 CI 使用同一依赖版本。
 
 主进程 `main.cjs`：
 
