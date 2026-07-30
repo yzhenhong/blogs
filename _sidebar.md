@@ -27,6 +27,8 @@
   * [UniApp](/cross-platform/uni-app.md)
   * [Taro](/cross-platform/taro.md)
   * [React Native](/cross-platform/react-native.md)
+  * [React Native](/cross-platform/react-native.md)
+  * [Electron](/cross-platform/electron.md)
 
 * 工具类
   * [如何用 Chrome 调试微信 web 页面](/tool/index.md)
