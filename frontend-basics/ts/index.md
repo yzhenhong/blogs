@@ -1,5 +1,9 @@
 # TypeScript 完全指南
 
+## 延伸阅读
+
+- [TypeScript 入门与配置](/frontend-basics/ts/getting-started/index.md)
+
 ## 目录
 1. [TypeScript 基础](#typescript-基础)
 2. [类型系统](#类型系统)

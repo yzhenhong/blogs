@@ -1,5 +1,16 @@
 # JavaScript 完全指南
 
+## 延伸阅读
+
+- [数据类型与判断](/frontend-basics/js/data-types/index.md)
+- [数组常用方法](/frontend-basics/js/array-methods/index.md)
+- [对象常用方法](/frontend-basics/js/object-methods/index.md)
+- [判断对象数组中是否存在指定对象](/frontend-basics/js/array-object-lookup/index.md)
+- [函数](/frontend-basics/js/functions/index.md)
+- [new 运算符](/frontend-basics/js/new-operator/index.md)
+- [防抖与节流](/frontend-basics/js/debounce-throttle/index.md)
+- [深度优先与广度优先遍历](/frontend-basics/js/traversal/index.md)
+
 ## 目录
 1. [JavaScript 基础](#javascript-基础)
 2. [数据类型](#数据类型)

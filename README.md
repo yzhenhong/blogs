@@ -28,20 +28,22 @@
 
 ### JavaScript 与 TypeScript
 
-- [JavaScript 数据类型与判断](/files/js数据类型以及判断/README.md)
-- [数组常用方法](/files/js数组的常用方法/README.md)
-- [对象常用方法](/files/js对象的常用方法/README.md)
-- [函数](/files/函数/README.md)
-- [new 运算符](/files/javascript的new运算符/README.md)
-- [防抖与节流](/files/防抖和节流/README.md)
-- [深度优先与广度优先遍历](/files/深度优先遍历和广度优先遍历/README.md)
+- [JavaScript 数据类型与判断](/frontend-basics/js/data-types/index.md)
+- [数组常用方法](/frontend-basics/js/array-methods/index.md)
+- [对象常用方法](/frontend-basics/js/object-methods/index.md)
+- [判断对象数组中是否存在指定对象](/frontend-basics/js/array-object-lookup/index.md)
+- [函数](/frontend-basics/js/functions/index.md)
+- [new 运算符](/frontend-basics/js/new-operator/index.md)
+- [防抖与节流](/frontend-basics/js/debounce-throttle/index.md)
+- [深度优先与广度优先遍历](/frontend-basics/js/traversal/index.md)
+- [TypeScript 入门与配置](/frontend-basics/ts/getting-started/index.md)
 
 ### CSS、工具与数据服务
 
-- [CSS 常见样式](/files/css常见样式/README.md)
-- [CSS 优先级](/files/css优先级/README.md)
-- [Git 使用笔记](/files/git使用/README.md)
-- [数据库安装](/files/数据库安装/README.md)
+- [CSS 常见样式](/frontend-basics/css/common-styles/index.md)
+- [CSS 优先级](/frontend-basics/css/specificity/index.md)
+- [Git 使用笔记](/tool/git/index.md)
+- [数据库安装](/tool/database/index.md)
 - [使用 Chrome 调试微信 Web 页面](/tool/index.md)
 
 ## 阅读建议

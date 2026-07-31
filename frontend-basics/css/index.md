@@ -1,5 +1,10 @@
 # CSS 完全指南
 
+## 延伸阅读
+
+- [CSS 常见样式](/frontend-basics/css/common-styles/index.md)
+- [CSS 选择器优先级](/frontend-basics/css/specificity/index.md)
+
 ## 目录
 1. [CSS 基础](#css-基础)
 2. [选择器](#选择器)
