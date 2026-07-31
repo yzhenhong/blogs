@@ -10,19 +10,19 @@
 * [首页](/)
 
 * 工程质量
-  * [SEO 优化](/seo/index.md)
-  * [性能优化](/optimization/index.md)
+  * [SEO 优化](/engineering-quality/seo/index.md)
+  * [性能优化](/engineering-quality/optimization/index.md)
 
 * 前端基础
-  * [CSS](/css/index.md)
-  * [JavaScript](/js/index.md)
-  * [TypeScript](/ts/index.md)
+  * [CSS](/frontend-basics/css/index.md)
+  * [JavaScript](/frontend-basics/js/index.md)
+  * [TypeScript](/frontend-basics/ts/index.md)
 
 * 前端框架
-  * [Vue](/vue/index.md)
-  * [React](/react/index.md)
-  * [Nuxt.js](/nuxt/index.md)
-  * [Next.js](/next/index.md)
+  * [Vue](/frontend-frameworks/vue/index.md)
+  * [React](/frontend-frameworks/react/index.md)
+  * [Nuxt.js](/frontend-frameworks/nuxt/index.md)
+  * [Next.js](/frontend-frameworks/next/index.md)
 
 * 跨端开发
   * [方案对比与选型](/cross-platform/index.md)

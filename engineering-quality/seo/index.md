@@ -521,7 +521,7 @@ https://example.com/#/seo/index
 - INP：拆分长任务、减少第三方脚本、缩小渲染范围、避免同步大计算。
 - CLS：为图片和广告预留尺寸、避免在已有内容上方动态插入元素、优化字体切换。
 
-性能是搜索体验的一部分，不会让不相关或低质量内容自动获得排名。完整排查方法见 [Web 性能优化指南](/optimization/index.md)。
+性能是搜索体验的一部分，不会让不相关或低质量内容自动获得排名。完整排查方法见 [Web 性能优化指南](/engineering-quality/optimization/index.md)。
 
 ## 监控、诊断与迭代
 
@@ -626,4 +626,4 @@ Search Console 的数据会延迟和聚合，不适合当实时监控。服务�
 - [Google Search Central](https://developers.google.com/search/docs)
 - [Bing Webmaster Guidelines](https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a)
 - [Schema.org](https://schema.org/)
-- [Web 性能优化指南](/optimization/index.md)
+- [Web 性能优化指南](/engineering-quality/optimization/index.md)

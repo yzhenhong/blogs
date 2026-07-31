@@ -6,10 +6,10 @@
 
 | 方向 | 主要内容 | 入口 |
 | --- | --- | --- |
-| 前端基础 | CSS、JavaScript、TypeScript | [CSS](/css/index.md) · [JavaScript](/js/index.md) · [TypeScript](/ts/index.md) |
-| 前端框架 | Vue、React 及其全栈框架 | [Vue](/vue/index.md) · [React](/react/index.md) · [Nuxt.js](/nuxt/index.md) · [Next.js](/next/index.md) |
+| 前端基础 | CSS、JavaScript、TypeScript | [CSS](/frontend-basics/css/index.md) · [JavaScript](/frontend-basics/js/index.md) · [TypeScript](/frontend-basics/ts/index.md) |
+| 前端框架 | Vue、React 及其全栈框架 | [Vue](/frontend-frameworks/vue/index.md) · [React](/frontend-frameworks/react/index.md) · [Nuxt.js](/frontend-frameworks/nuxt/index.md) · [Next.js](/frontend-frameworks/next/index.md) |
 | 跨端开发 | 小程序、移动端和桌面端 | [跨端选型](/cross-platform/index.md) |
-| 工程质量 | 性能、SEO、调试和工程工具 | [性能优化](/optimization/index.md) · [SEO 优化](/seo/index.md) · [工具](/tool/index.md) |
+| 工程质量 | 性能、SEO、调试和工程工具 | [性能优化](/engineering-quality/optimization/index.md) · [SEO 优化](/engineering-quality/seo/index.md) · [工具](/tool/index.md) |
 
 ## 跨端开发
 
@@ -54,4 +54,3 @@
 ## 关于我
 
 专注前端开发，现居深圳。代码与其他项目见 [GitHub](https://github.com/yzhenhong)。
-

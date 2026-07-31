@@ -1118,4 +1118,4 @@ interface PerformanceEvent {
 - [web.dev Performance](https://web.dev/performance/)
 - [Chrome DevTools Performance](https://developer.chrome.com/docs/devtools/performance/)
 - [MDN Performance API](https://developer.mozilla.org/docs/Web/API/Performance_API)
-- [SEO 优化完全指南](/seo/index.md)
+- [SEO 优化完全指南](/engineering-quality/seo/index.md)

@@ -1055,7 +1055,7 @@ useHead({
 - 动态文章更新能反映到 lastmod
 - `noindex` 页面不进入 sitemap
 
-更完整的策略见 [SEO 优化完全指南](/seo/index.md)。
+更完整的策略见 [SEO 优化完全指南](/engineering-quality/seo/index.md)。
 
 ## 鉴权与安全
 
@@ -1403,7 +1403,7 @@ npx nuxi@latest module add image
 
 ### 继续阅读
 
-完整的网络、运行时、缓存和性能预算方法见 [Web 性能优化完全指南](/optimization/index.md)。
+完整的网络、运行时、缓存和性能预算方法见 [Web 性能优化完全指南](/engineering-quality/optimization/index.md)。
 
 ## 构建与部署
 
@@ -1702,6 +1702,6 @@ const { data: article } = await useFetch(
 - [Nuxt 官方文档](https://nuxt.com/docs)
 - [Nuxt 迁移指南](https://nuxt.com/docs/getting-started/upgrade)
 - [Nitro 文档](https://nitro.build/)
-- [Vue 完全指南](/vue/index.md)
-- [SEO 优化完全指南](/seo/index.md)
-- [Web 性能优化完全指南](/optimization/index.md)
+- [Vue 完全指南](/frontend-frameworks/vue/index.md)
+- [SEO 优化完全指南](/engineering-quality/seo/index.md)
+- [Web 性能优化完全指南](/engineering-quality/optimization/index.md)
